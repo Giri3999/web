@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shirt Store</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .shirt-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+        .shirt-card {
+            background: white;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            width: 200px;
+        }
+        .shirt-card img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .form-popup {
+            display: none; /* Initially hide the form */
+            margin: 20px;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .buy-button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buy-button:hover {
+            background-color: #2980b9;
+        }
+        .buy-text {
+            color: #3498db;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .buy-text:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        const shirts = [
+            { name: "Stylish Cotton Shirt", price: 1999, image: "https://via.placeholder.com/150" },
+            { name: "Classic White Shirt", price: 1499, image: "https://via.placeholder.com/150" },
+            { name: "Casual Denim Shirt", price: 1799, image: "https://via.placeholder.com/150" },
+            { name: "Formal Black Shirt", price: 2299, image: "https://via.placeholder.com/150" },
+            { name: "Graphic T-Shirt", price: 999, image: "https://via.placeholder.com/150" },
+            { name: "Summer Linen Shirt", price: 1899, image: "https://via.placeholder.com/150" },
+            { name: "Retro Polka Dot Shirt", price: 1599, image: "https://via.placeholder.com/150" },
+            { name: "Sporty Activewear Shirt", price: 1299, image: "https://via.placeholder.com/150" },
+        ];
+
+        function showForm(index) {
+            const shirt = shirts[index];
+            const form = document.getElementById('orderForm');
+
+            // Fill in the form with shirt details
+            form.innerHTML = `
+                <h2>Order Form for ${shirt.name}</h2>
+                <img src="${shirt.image}" alt="${shirt.name}" style="max-width: 300px;">
+                <p>Price: ₹${shirt.price}</p>
+                <button class="close-button" onclick="toggleForm()">Close</button>
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                    <textarea placeholder="Shipping Address" required></textarea>
+                    <button type="submit" class="buy-button">Submit Order</button>
+                </form>
+            `;
+            form.style.display = 'block';
+        }
+
+        function toggleForm() {
+            const form = document.getElementById('orderForm');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+<body>
+    <style>
+        /* Basic styling for the navigation menu */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            background-color: #333;
+        }
+
+        li {
+            position: relative;
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            display: block;
+        }
+
+        a:hover {
+            background-color: #555;
+        }
+
+        /* Dropdown styling */
+        .sub-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .sub-menu a {
+            color: #333;
+            padding: 10px;
+            background-color: #f9f9f9;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sub-menu a:hover {
+            background-color: #ddd;
+        }
+
+        /* Show dropdown on hover */
+        li:hover .sub-menu {
+            display: block;
+        }
+
+    </style>
+    <header>
+        <h1>GR STORES</h1>
+        <nav>
+           
+    <ul>
+        <!-- Home Link -->
+        <li><a href="index.html">Home</a></li>
+        
+        <!-- Sizes Dropdown -->
+        <li>
+            <a href="#">Sizes</a>
+            <ul class="sub-menu">
+                <li><a href="SHOP.html">28</a></li>
+                <li><a href="large.html">30</a></li>
+                <li><a href="xl.html">32</a></li>
+                <li><a href="xl.html">34</a></li>
+                <li><a href="xl.html">36</a></li>
+            </ul>
+        </li>
+         <li>
+                                <a href="#">PRODUCTS</a>
+                                <ul class="sub-menu">
+                                    <!-- SHIRTS Menu with Submenu for Sizes -->
+                                    <li>
+                                        <a href="SHOP.html" id="shirtsLink">SHIRTS</a>
+                                        <!-- Submenu for Sizes -->
+                                        
+                                    </li>
+                                    <!-- Other Products -->
+                                    <li><a href="#">T-SHIRTS</a></li>
+                                    <li><a href="pant.html">PANTS</a></li>
+                                    <li><a href="#">SHORTS</a></li>
+                                </ul>
+                            </li>
+        <!-- Back Link -->
+       
+    </ul>
+
+        </nav>
+    </header>
+    
+    <main>
+    
+    
+        <div class="shirt-list">
+            <div class="shirt-card" onclick="showForm(0)">
+                <img src="img/product/product-55.jpg" alt="Stylish Cotton Shirt">
+                <h3>Sizes : 28,30,32,34,36</h3>
+                <h3>SHIRT CODE:GP01</h3>
+                <p>Price: ₹1050</p>
+                <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+            </div>
+            <div class="shirt-card" onclick="showForm(0)">
+                <img src="img/product/product-56.jpg" alt="Stylish Cotton Shirt">
+                <h3>SIzes : 28</h3>
+                <h3>SHIRT CODE:GP02</h3>
+                <p>Price: ₹950</p>
+                <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+            </div>
+            <div class="shirt-card" onclick="showForm(0)">
+                <img src="img/product/product-57.jpg" alt="Stylish Cotton Shirt">
+                <h3>SIzes : 28,30,32,34</h3>
+                <h3>SHIRT CODE:GP03</h3>
+                <p>Price: ₹1050</p>
+                <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+            </div>
+            <div class="shirt-card" onclick="showForm(0)">
+                <img src="img/product/product-58.jpg" alt="Stylish Cotton Shirt">
+                <h3>SIzes :30,32,34,36</h3>
+                <h3>SHIRT CODE:GP04</h3>
+                <p>Price: ₹1050</p>
+                <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+            </div>
+           
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-59.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 28</h3>
+                  <h3>SHIRT CODE: GP05</h3>
+                  <p>Price: ₹950</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 60 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-60.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 30,32,34,36</h3>
+                  <h3>SHIRT CODE: GP06</h3>
+                  <p>Price: ₹1050</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 61 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-61.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 30,32,34,36</h3>
+                  <h3>SHIRT CODE: GP07</h3>
+                  <p>Price: ₹1050</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 62 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-62.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 32,34,36</h3>
+                  <h3>SHIRT CODE: GP08</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 63 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-63.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 32,34,36</h3>
+                  <h3>SHIRT CODE: GP09</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 64 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-64.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 32,34,36</h3>
+                  <h3>SHIRT CODE: GP10</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 65 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-65.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 32,34,36</h3>
+                  <h3>SHIRT CODE: GP11</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 66 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-66.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 28,30,36</h3>
+                  <h3>SHIRT CODE: GP12</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 67 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-67.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 30,32,34,36</h3>
+                  <h3>SHIRT CODE: GP13</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 68 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-68.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 30,32,34,36</h3>
+                  <h3>SHIRT CODE: GP14</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 69 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-69.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 30,32,34,36</h3>
+                  <h3>SHIRT CODE: GP15</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 70 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-70.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 30</h3>
+                  <h3>SHIRT CODE: GP16</h>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 71 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-71.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 30</h3>
+                  <h3>SHIRT CODE: GP17</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+              
+                <!-- Product 72 -->
+                <div class="shirt-card" onclick="showForm(0)">
+                  <img src="img/product/product-72.jpg" alt="Stylish Cotton Shirt">
+                  <h3>Sizes: 30</h3>
+                  <h3>SHIRT CODE: GP18</h3>
+                  <p>Price: ₹850</p>
+                  <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+                </div>
+                <!-- Product 73 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-73.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 30</h3>
+    <h3>SHIRT CODE: GP19</h3>
+    <p>Price: ₹850</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 74 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-74.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 32</h3>
+    <h3>SHIRT CODE: GP20</h3>
+    <p>Price: ₹850</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 75 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-75.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 32</h3>
+    <h3>SHIRT CODE: GP21</h3>
+    <p>Price: ₹850</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 76 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-76.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,32</h3>
+    <h3>SHIRT CODE: GP22</h3>
+    <p>Price: ₹950</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 77 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-77.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30,32,34</h3>
+    <h3>SHIRT CODE: GP23</h3>
+    <p>Price: ₹950</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 78 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-78.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30</h3>
+    <h3>SHIRT CODE: GP24</h3>
+    <p>Price: ₹650</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 79 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-79.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30,32,34</h3>
+    <h3>SHIRT CODE: GP25</h3>
+    <p>Price: ₹550</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 80 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-80.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 30,32,34</h3>
+    <h3>SHIRT CODE: GP26</h3>
+    <p>Price: ₹650</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 81 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-81.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30,32,34</h3>
+    <h3>SHIRT CODE: GP27</h3>
+    <p>Price: ₹700</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 82 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-82.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30,32,34</h3>
+    <h3>SHIRT CODE: GP28</h3>
+    <p>Price: ₹650</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 83 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-83.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30,34,36</h3>
+    <h3>SHIRT CODE: GP29</h3>
+    <p>Price: ₹750</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 84 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-84.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30,32,34</h3>
+    <h3>SHIRT CODE: GP30</h3>
+    <p>Price: ₹650</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 85 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-85.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30,32,34</h3>
+    <h3>SHIRT CODE: GP31</h3>
+    <p>Price: ₹500</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 86 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-86.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30,32</h3>
+    <h3>SHIRT CODE: GP32</h3>
+    <p>Price: ₹750</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 87 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-87.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 30,32</h3>
+    <h3>SHIRT CODE: GP33</h3>
+    <p>Price: ₹750</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 88 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-88.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 30,32,34</h3>
+    <h3>SHIRT CODE: GP34</h3>
+    <p>Price: ₹750</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 89 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-89.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28</h3>
+    <h3>SHIRT CODE: GP35</h3>
+    <p>Price: ₹650</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 90 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-90.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 30,32</h3>
+    <h3>SHIRT CODE: GP36</h3>
+    <p>Price: ₹750</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+<!-- Product 91 -->
+<div class="shirt-card" onclick="showForm(0)">
+    <img src="img/product/product-91.jpg" alt="Stylish Cotton Shirt">
+    <h3>Sizes: 28,30</h3>
+    <h3>SHIRT CODE: GP37</h3>
+    <p>Price: ₹750</p>
+    <span class="buy-text"><a href="SHIRT-1.html">Buy</a></span>
+</div>
+
+        </div>
+
+        <div class="form-popup" id="orderForm" style="display: none;"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Shirt Store. All rights reserved.</p>
+    </footer>
+</body>
+</html>
